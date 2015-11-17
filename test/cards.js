@@ -101,6 +101,8 @@ describe('makeHand', function() {
 		var str = "FH";
 		var fn = function() { Cards.makeHand(str);};
 		expect(fn).to.throw(Error);
+		expect(fn).to.throw(RangeError);
+		expect(fn).to.throw(str);
 	});
 });
 
