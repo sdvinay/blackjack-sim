@@ -3,49 +3,50 @@ var Scoring = require('../lib/scoring');
 var Cards = require('../lib/cards');
 
 
-var testScoreHand = function(handStr, expectedScore, expectedBJ) {
-		var hand = Cards.makeHand(handStr);
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', expectedScore);
-		expect(score).property('blackjack', expectedBJ);
+var testScoreHand = function(handStr, expectedScore, bj) {
+	bj = bj || false;
+	var hand = Cards.makeHand(handStr);
+	var score = Scoring.scoreHand(hand);
+	expect(score).property('score', expectedScore);
+	expect(score).property('blackjack', bj);
 }
 
 describe('scoreHand', function(){
 	it('scores a simple two-card case', function(){
-		testScoreHand("3H 7C", 10, false);
+		testScoreHand("3H 7C", 10);
 	});
 	it('scores a simple five-card case', function(){
-		testScoreHand("3H 7C 2D 6C 5S", 23, false);
+		testScoreHand("3H 7C 2D 6C 5S", 23);
 	});
 	it('scores a three-card case with face cards', function(){
-		testScoreHand("3H KC TD", 23, false);
+		testScoreHand("3H KC TD", 23);
 	});
 	it('uses an ace as 1', function(){
-		testScoreHand("7H 8C AD", 16, false);
+		testScoreHand("7H 8C AD", 16);
 	});
 	it('uses an ace as 11', function(){
-		testScoreHand("7H AD", 18, false);
+		testScoreHand("7H AD", 18);
 	});
 	it('scores AA as 12 (eg, use one as 11, one as 1)', function(){
-		testScoreHand("AH AD", 12, false);
+		testScoreHand("AH AD", 12);
 	});
 	it('scores 46AA as 12 (eg, use both as 1)', function(){
-		testScoreHand("4C 6S AH AD", 12, false);
+		testScoreHand("4C 6S AH AD", 12);
 	});
 	it('credits blackjack on KA', function(){
-		testScoreHand("KH AD", 21, true);
+		testScoreHand("KH AD", 21, bj=true);
 	});
 	it('credits blackjack on TA', function(){
-		testScoreHand("TH AD", 21, true);
+		testScoreHand("TH AD", 21, bj=true);
 	});
 	it('credits blackjack on AT', function(){
-		testScoreHand("AD TH", 21, true);
+		testScoreHand("AD TH", 21, bj=true);
 	});
 	it('credits 21 but no blackjack on A64', function(){
-		testScoreHand("AS 6C 4H", 21, false);
+		testScoreHand("AS 6C 4H", 21);
 	});
 	it('credits 21 but no blackjack on A4K6', function(){
-		testScoreHand("AC 4H KD 6D", 21, false);
+		testScoreHand("AC 4H KD 6D", 21);
 	});
 });
 
