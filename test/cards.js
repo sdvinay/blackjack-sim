@@ -9,10 +9,11 @@ describe('makeDeck', function(){
 
 	it('returns no repeated cards', function(){
 		var deck = Cards.makeDeck();
-		for (i in deck) {
-			for (var j = 0; j<i; j++) {
-				expect(deck[i]).to.not.deep.equal(deck[j]);
-			}
+		var cards = {};
+		for (var i = 0; i< deck.length; i++) {
+			var cardName = deck[i].getName();
+			expect(cards[cardName]).a('undefined');
+			cards[cardName] = "already exists";;
 		}
 	});
 });
