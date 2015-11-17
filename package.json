@@ -2,9 +2,12 @@
   "name": "blackjack-sim",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/app.js",
   "scripts": {
-    "test": "mocha test"
+    "start": "node lib/app.js",
+    "test": "mocha test",
+    "docker-start": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm start",
+    "docker-test": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm test"
   },
   "keywords": [],
   "author": "",
