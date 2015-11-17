@@ -35,8 +35,11 @@ describe('scoreHand', function(){
 	it('credits blackjack on KA', function(){
 		testScoreHand("KH AD", 21, true);
 	});
-	it('credits blackjack on AT', function(){
+	it('credits blackjack on TA', function(){
 		testScoreHand("TH AD", 21, true);
+	});
+	it('credits blackjack on AT', function(){
+		testScoreHand("AD TH", 21, true);
 	});
 	it('credits 21 but no blackjack on A64', function(){
 		testScoreHand("AS 6C 4H", 21, false);
