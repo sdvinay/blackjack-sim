@@ -57,45 +57,27 @@ describe('getValues and ranks', function() {
 });
 
 describe('makeHand', function() {
-	it ('handles a single card', function() {
-		var str = "7H";
+	var testMakeHand = function(str, expectedLength, expectedValuesArray) {
 		var h = Cards.makeHand(str);
-		expect(h.length).to.equal(1);
-		expect(h[0].getName()).to.equal(str);
-		expect(h[0].getValue()).to.equal(7);
+		expect(h).to.have.property('length', expectedLength);
+		expect(h.map(x => x.getName()).join(" ")).to.equal(str);
+		expect(h.map(x => x.getValue())).to.deep.equal(expectedValuesArray);
+	};
+
+	it ('handles a single card', function() {
+		testMakeHand("7H", length=1, [7]);
 	});
 	it ('handles an ace', function() {
-		var str = "AH";
-		var h = Cards.makeHand(str);
-		expect(h.length).to.equal(1);
-		expect(h[0].getName()).to.equal(str);
-		expect(h[0].getValue()).to.equal(1);
+		testMakeHand("AH", length=1, [1]);
 	});
 	it ('handles a king', function() {
-		var str = "KH";
-		var h = Cards.makeHand(str);
-		expect(h.length).to.equal(1);
-		expect(h[0].getName()).to.equal(str);
-		expect(h[0].getValue()).to.equal(10);
-		expect(h[0].rank).to.equal(13);
+		testMakeHand("KH", length=1, [10]);
 	});
 	it ('handles two cards', function() {
-		var str = "7H AC";
-		var h = Cards.makeHand(str);
-		expect(h.length).to.equal(2);
-		expect(h[0].getName()).to.equal(str.split(' ')[0]);
-		expect(h[1].getName()).to.equal(str.split(' ')[1]);
-		expect(h[0].getValue()).to.equal(7);
-		expect(h[1].getValue()).to.equal(1);
+		testMakeHand("7H AC", length=2, [7,1]);
 	});
 	it ('handles three cards', function() {
-		var str = "7H AC TD";
-		var h = Cards.makeHand(str);
-		expect(h.length).to.equal(3);
-		expect(h.map(x => x.getName()).join(" ")).to.equal(str);
-		expect(h[0].getValue()).to.equal(7);
-		expect(h[1].getValue()).to.equal(1);
-		expect(h[2].getValue()).to.equal(10);
+		testMakeHand("7H AC TD", length=3, [7,1,10]);		
 	});
 	it ('throws on a bad rank', function() {
 		var str = "FH";
