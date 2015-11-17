@@ -20,40 +20,40 @@ describe('makeDeck', function(){
 
 describe('getName and ranks', function() {
 	it ('handles ace', function() {
-		var c = new Cards.Card(1, "H");
-		expect(c.getName()).to.equal("AH");
+		var c = Cards.makeCard(1, "H");
+		expect(Cards.getCardName(c)).to.equal("AH");
 	});
 	it ('handles numbers', function() {
-		var c = new Cards.Card(2, "H");
-		expect(c.getName()).to.equal("2H");
+		var c = Cards.makeCard(2, "H");
+		expect(Cards.getCardName(c)).to.equal("2H");
 	});
 	it ('handles ten', function() {
-		var c = new Cards.Card(10, "H");
-		expect(c.getName()).to.equal("TH");
+		var c = Cards.makeCard(10, "H");
+		expect(Cards.getCardName(c)).to.equal("TH");
 	});
 	it ('handles king', function() {
-		var c = new Cards.Card(13, "H");
-		expect(c.getName()).to.equal("KH");
+		var c = Cards.makeCard(13, "H");
+		expect(Cards.getCardName(c)).to.equal("KH");
 	});
 });
 
 
 describe('getValues and ranks', function() {
 	it ('handles ace', function() {
-		var c = new Cards.Card(1, "H");
-		expect(c.getValue()).to.equal(1);
+		var c = Cards.makeCard(1, "H");
+		expect(Cards.getCardValue(c)).to.equal(1);
 	});
 	it ('handles numbers', function() {
-		var c = new Cards.Card(2, "H");
-		expect(c.getValue()).to.equal(2);
+		var c = Cards.makeCard(2, "H");
+		expect(Cards.getCardValue(c)).to.equal(2);
 	});
 	it ('handles ten', function() {
-		var c = new Cards.Card(10, "H");
-		expect(c.getValue()).to.equal(10);
+		var c = Cards.makeCard(10, "H");
+		expect(Cards.getCardValue(c)).to.equal(10);
 	});
 	it ('handles king', function() {
-		var c = new Cards.Card(13, "H");
-		expect(c.getValue()).to.equal(10);
+		var c = Cards.makeCard(13, "H");
+		expect(Cards.getCardValue(c)).to.equal(10);
 	});
 });
 
@@ -61,8 +61,8 @@ describe('makeHand', function() {
 	var testMakeHand = function(str, expectedLength, expectedValuesArray) {
 		var h = Cards.makeHand(str);
 		expect(h).to.have.property('length', expectedLength);
-		expect(h.map(x => x.getName()).join(" ")).to.equal(str);
-		expect(h.map(x => x.getValue())).to.deep.equal(expectedValuesArray);
+		expect(h.map(Cards.getCardName).join(" ")).to.equal(str);
+		expect(h.map(Cards.getCardValue)).to.deep.equal(expectedValuesArray);
 	};
 
 	it ('handles a single card', function() {
