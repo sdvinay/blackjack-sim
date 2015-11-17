@@ -11,7 +11,7 @@ describe('makeDeck', function(){
 		var deck = Cards.makeDeck();
 		var cards = {};
 		for (var i = 0; i< deck.length; i++) {
-			var cardName = deck[i].getName();
+			var cardName = Cards.getCardName(deck[i]);
 			expect(cards[cardName]).a('undefined');
 			cards[cardName] = "already exists";;
 		}
