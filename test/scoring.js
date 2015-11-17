@@ -2,60 +2,47 @@ var expect = require('chai').expect;
 var Scoring = require('../lib/scoring');
 var Cards = require('../lib/cards');
 
+
+var testScoreHand = function(handStr, expectedScore, expectedBJ) {
+		var hand = Cards.makeHand(handStr);
+		var score = Scoring.scoreHand(hand);
+		expect(score).property('score', expectedScore);
+		expect(score).property('blackjack', expectedBJ);
+}
+
 describe('scoreHand', function(){
 	it('scores a simple two-card case', function(){
-		var hand = Cards.makeHand("3H 7C");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 10);
-		expect(score).property('blackjack', false);
+		testScoreHand("3H 7C", 10, false);
 	});
 	it('scores a simple five-card case', function(){
-		var hand = Cards.makeHand("3H 7C 2D 6C 5S");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 23);
-		expect(score).property('blackjack', false);
+		testScoreHand("3H 7C 2D 6C 5S", 23, false);
 	});
 	it('scores a three-card case with face cards', function(){
-		var hand = Cards.makeHand("3H KC TD");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 23);
-		expect(score).property('blackjack', false);
+		testScoreHand("3H KC TD", 23, false);
 	});
 	it('uses an ace as 1', function(){
-		var hand = Cards.makeHand("7H 8C AD");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 16);
-		expect(score).property('blackjack', false);
+		testScoreHand("7H 8C AD", 16, false);
 	});
 	it('uses an ace as 11', function(){
-		var hand = Cards.makeHand("7H AD");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 18);
-		expect(score).property('blackjack', false);
+		testScoreHand("7H AD", 18, false);
 	});
-	it('credits blackjack on AK', function(){
-		var hand = Cards.makeHand("KH AD");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 21);
-		expect(score).property('blackjack', true);
+	it('scores AA as 12 (eg, use one as 11, one as 1)', function(){
+		testScoreHand("AH AD", 12, false);
+	});
+	it('scores 46AA as 12 (eg, use both as 1)', function(){
+		testScoreHand("4C 6S AH AD", 12, false);
+	});
+	it('credits blackjack on KA', function(){
+		testScoreHand("KH AD", 21, true);
 	});
 	it('credits blackjack on AT', function(){
-		var hand = Cards.makeHand("TH AD");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 21);
-		expect(score).property('blackjack', true);
+		testScoreHand("TH AD", 21, true);
 	});
 	it('credits 21 but no blackjack on A64', function(){
-		var hand = Cards.makeHand("AS 6C 4H");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 21);
-		expect(score).property('blackjack', false);
+		testScoreHand("AS 6C 4H", 21, false);
 	});
 	it('credits 21 but no blackjack on A4K6', function(){
-		var hand = Cards.makeHand("AC 4H KD 6D");
-		var score = Scoring.scoreHand(hand);
-		expect(score).property('score', 21);
-		expect(score).property('blackjack', false);
+		testScoreHand("AC 4H KD 6D", 21, false);
 	});
 });
 
