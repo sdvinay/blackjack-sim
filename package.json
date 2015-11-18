@@ -5,7 +5,7 @@
   "main": "lib/app.js",
   "scripts": {
     "start": "node lib/app.js",
-    "test": "mocha test",
+    "test": "mocha --recursive test",
     "docker-start": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm start",
     "docker-test": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm test"
   },
