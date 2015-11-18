@@ -17,5 +17,8 @@ describe('dealerStrategy', function() {
 		testHitDecision("6S 4C", "hit");
 		testHitDecision("TS 4C", "hit");
 		testHitDecision("TS 7C", "stand");
+		testHitDecision("AS 7C", "stand");
+		testHitDecision("AS 6C", "hit");
+		testHitDecision("AS 6C TD", "stand");
 	});
 });
