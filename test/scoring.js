@@ -11,7 +11,7 @@ var testScoreHand = function(handStr, expectedScore, bj, soft) {
 	expect(score).property('score', expectedScore);
 	expect(score).property('blackjack', bj);
 	expect(score).property('soft', soft);
-}
+};
 
 describe('scoreHand', function(){
 	it('scores a simple two-card case', function(){

@@ -12,10 +12,10 @@ var runDeckTests = function(deck) {
 		for (var i = 0; i< deck.length; i++) {
 			var cardName = deck[i].getName();
 			expect(cards[cardName]).a('undefined');
-			cards[cardName] = "already exists";;
+			cards[cardName] = "already exists";
 		}
 	});
-}
+};
 
 module.exports = {
 	runDeckTests: runDeckTests
