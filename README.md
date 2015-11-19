@@ -8,7 +8,7 @@ To get the code and dependencies:
 	cd blackjack-sim
     npm install
 
-The probject currently depends on node v4.*.  If you have that installed already, 
+The project currently depends on node v4.*.  If you have that installed already, 
 you can run the app and tests directly.  The app (npm start) currently simulates
 100 hands with three players, each playing the dealer's strategy.
 
