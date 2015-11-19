@@ -1,6 +1,9 @@
 node_modules
 npm-debug.log
 
+# istanbul generated coverage reports
+coverage
+
 # vim swap files
 *.swp
 .*.swp
