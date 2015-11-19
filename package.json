@@ -5,7 +5,7 @@
   "main": "lib/app.js",
   "scripts": {
     "start": "node lib/app.js",
-    "test": "mocha test",
+    "test": "istanbul cover _mocha -- --recursive test",
     "jshint": "jshint --verbose **/*.js",
     "docker-start": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm start",
     "docker-test": "docker run -it --rm --name blackjack -v \"$PWD\":/usr/src/app -w /usr/src/app node:4 npm test"
@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.4.1",
+    "istanbul": "^0.4.0",
     "jshint": "^2.9.1-rc1",
     "mocha": "^2.3.4"
   }
