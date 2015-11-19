@@ -13,10 +13,10 @@ you can run the app and tests directly.  The app (npm start) currently simulates
 100 hands with three players, each playing the dealer's strategy.
 
     npm test
-    npm jshint
+    npm run jshint
     npm start
   
 If you don't have node v4, you can run it in docker.  If you have docker-machine already running:
 
-    npm docker-start
-    npm docker-test
+    npm run docker-start
+    npm run docker-test
