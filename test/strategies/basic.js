@@ -2,8 +2,6 @@ var expect = require('chai').expect;
 var Cards = require('../../lib/cards');
 var strategy = require('../../lib/strategies/basic');
 
-// This test function is dealer-specific, as there's no way to specify
-// the dealer hole card.
 function testHitDecision(handStr, holeCard, exp) {
 	var desc = exp + "s on " + handStr + " vs " + holeCard;
 	it (desc, function() {
